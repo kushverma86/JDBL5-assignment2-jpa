@@ -24,13 +24,12 @@ public class BookController {
     }
 
     @PutMapping("/replaceWill")
-    public List<Book> replaceAuthorWill(){
+    public String replaceAuthorWill(){
         return bookService.replaceAuthorByFirstName("Will", "William");
     }
 
     @DeleteMapping("/deletegreaterthan")
-    public List<Book> deleteBookByGreaterCost(@RequestParam(value = "cost") int cost){
+    public int deleteBookByGreaterCost(@RequestParam(value = "cost") int cost){
         return bookService.deleteBookByGreaterCost(cost);
     }
-
 }

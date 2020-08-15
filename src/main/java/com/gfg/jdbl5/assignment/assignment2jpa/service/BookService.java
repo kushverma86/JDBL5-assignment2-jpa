@@ -25,29 +25,22 @@ public class BookService {
     }
 
 
-    public List<Book> replaceAuthorByFirstName(String find, String replace){
-        List<Book> books = bookRepository.findByFirstName(find);
-        List<Book> result = new ArrayList<>();
-
-        for (Book book: books){
-            String author = book.getAuthorName();
-            String firstName = author.trim().split(" ")[0];
-
-            if (firstName.equals(find)){
-                book.setAuthorName(replace);
-                result.add(bookRepository.save(book));
-            }
+    public String replaceAuthorByFirstName(String find, String replace){
+        try {
+            bookRepository.updateByFirstName(find, replace);
         }
-        return result;
+        catch (Exception e){
+            e.printStackTrace();
+            return "Update Fail";
+        }
 
+        return "Update Success";
     }
 
-    public List<Book> deleteBookByGreaterCost(int cost){
+    public int deleteBookByGreaterCost(int cost){
 
-        List<Book> books = bookRepository.findByCostGreater(cost);
-        bookRepository.deleteAll(books);
+        return bookRepository.deleteBookByCostGreater(cost);
 
-        return books;
     }
 
 
