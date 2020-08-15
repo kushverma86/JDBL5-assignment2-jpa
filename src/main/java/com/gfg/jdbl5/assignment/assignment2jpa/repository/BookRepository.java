@@ -22,8 +22,8 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     public int deleteBookByCostGreater(int cost);
 
     @Modifying
-    @Query("update Book b set b.authorName = :replace where b.authorName like :find or b.authorName" +
-            "  like :find %")
+    @Query("update Book b set b.authorName = :replace where b.authorName LIKE :find or b.authorName" +
+            "  LIKE :find %")
     public void updateByFirstName(String find, String replace);
 
 }
